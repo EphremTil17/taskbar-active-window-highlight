@@ -31,7 +31,23 @@ then click **Compile Mod**.
 Clicking the taskbar or a preview list briefly gives focus to the taskbar
 itself, and Windows then reports no active window. With the last setting on,
 the window you came from stays highlighted until another window or the desktop
-takes focus.
+takes focus, or the window is minimized or closed.
+
+## How it differs from Taskbar Recent Focus Highlight
+
+[Taskbar Recent Focus Highlight](https://windhawk.net/mods/taskbar-recent-focus-highlight)
+also marks a window in the thumbnail preview, but it answers a different
+question: which windows of this app were used most recently. It keeps its own
+focus history, with minimum-focus and decay timers, on a background thread.
+
+This mod shows only which window is active right now, using Explorer's own
+active task item, with no focus tracking, threads or timers. In practice:
+
+- While another app has focus, this mod marks nothing in this app's preview;
+  Recent Focus Highlight still marks its last-used window.
+- This mod also marks single-window previews; Recent Focus Highlight skips them.
+- This mod changes only the previews; Recent Focus Highlight's main feature is
+  highlighting taskbar icons.
 
 ## How it works
 
@@ -75,9 +91,8 @@ The taskbar is critical UI, so the mod is built to stay out of its way:
 - **One element per card**, created once and then only shown or hidden. Its
   geometry follows the card through XAML bindings, so no resize or relayout
   handling is needed.
-- **Small, and clean to unload.** About 500 lines of code and three hooks. No
-  event handlers or callbacks stay registered in Explorer, so disabling the
-  mod cannot leave its code reachable.
+- **Clean to unload.** No event handlers or callbacks stay registered in
+  Explorer, so disabling the mod cannot leave its code reachable.
 
 Measured with a timing build on Windows 11 26H2 (build 26300.9974), in normal
 use (window switching and opening multi-window previews):
@@ -94,9 +109,13 @@ frame at 60 Hz. Nothing runs on hover, layout or timers.
 
 ## Compatibility
 
-Tested on Windows 11 26H2, build 26300.9974 (`Taskbar.View.dll`
-2609.12001.100.0), with and without Windows 11 Taskbar Styler. It needs the
-Windows 11 XAML taskbar; the classic Windows 10 taskbar is not supported.
+Requires the Windows 11 taskbar's XAML thumbnail previews
+(`TaskItemThumbnailView` in `Taskbar.View.dll`). Tested on Windows 11 26H2,
+build 26300.9974 (`Taskbar.View.dll` 2609.12001.100.0), with and without
+Windows 11 Taskbar Styler.
+
+With the classic thumbnails, the Windows 10 taskbar, or taskbar replacements
+such as StartAllBack or ExplorerPatcher, the mod has no effect.
 
 ## Development
 

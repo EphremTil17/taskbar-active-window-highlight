@@ -3,6 +3,29 @@
 All notable changes to this mod are listed here. Versions match the mod's
 `@version` and the repository's git tags.
 
+## 0.1.1 — 2026-11-13
+
+### Fixed
+
+- A window minimized from the taskbar (by clicking its button) or closed while
+  the taskbar had focus stayed highlighted as active. It is now cleared, and a
+  minimized or closed window is never shown as active when a preview opens.
+
+### Changed
+
+- Removed an unload flag that had no effect: Windhawk removes the hooks
+  before the mod's cleanup runs.
+- Listed the symbol modules (`Taskbar.View.dll`, `ExplorerExtensions.dll`)
+  above the symbol hooks, as the Windhawk catalog checks require.
+
+### Documentation
+
+- Stated the requirement for the Windows 11 XAML thumbnail previews, and that
+  the mod has no effect with StartAllBack, ExplorerPatcher or the classic
+  thumbnails.
+- Added how this mod differs from Taskbar Recent Focus Highlight.
+- Removed line and hook counts that would drift out of date.
+
 ## 0.1.0 — 2026-11-13
 
 Initial release.
