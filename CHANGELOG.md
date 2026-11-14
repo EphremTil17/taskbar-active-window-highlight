@@ -1,0 +1,27 @@
+# Changelog
+
+All notable changes to this mod are listed here. Versions match the mod's
+`@version` and the repository's git tags.
+
+## 0.1.0 — 2026-11-13
+
+Initial release.
+
+### Added
+
+- Accent-colored highlight on the active window's card in the taskbar
+  thumbnail preview, so the active window is visible at a glance when an app
+  has several windows open.
+- Settings for highlight color (Windows accent color by default, or a hex
+  color), fill opacity, and outline thickness.
+- "Keep the highlight while using the taskbar": the window you came from stays
+  highlighted while the taskbar or a preview list has focus.
+
+### Notes
+
+- The active window and each card's window come from Explorer's own task list
+  state; the mod does no focus tracking, polling, or timing of its own.
+- Measured cost in normal use: about 0.004–0.013 ms per event, at most
+  0.67 ms.
+- The taskbar button keeps Windows' native active indicator.
+- Tested on Windows 11 26H2, build 26300.9974.
